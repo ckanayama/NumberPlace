@@ -1,24 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 開発環境
 
-Things you may want to cover:
+- 初回のみ実行
 
-* Ruby version
+````
+$ bundle
+$ bin/rails db:create db:migrate
+````
 
-* System dependencies
+- アプリケーション立ち上げ
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+$ bin/rails s
+```
