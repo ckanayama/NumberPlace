@@ -1,0 +1,12 @@
+.puzzle {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  width: 20em;
+  border: 1px solid #999;
+
+  .puzzle_cell {
+    border: 1px solid #999;
+    font-size: 1.2em;
+    text-align: center;
+  }
+}
