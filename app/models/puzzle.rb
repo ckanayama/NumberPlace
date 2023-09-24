@@ -17,7 +17,7 @@ class Puzzle < ApplicationRecord
 
     tmp_table.each_slice(9).with_index do |row, row_index|
       if row_index.zero?
-        table += (0..9).to_a.shuffle
+        table += (1..9).to_a.shuffle
         next
       end
 
@@ -41,7 +41,7 @@ class Puzzle < ApplicationRecord
 
         # 値の選択
         reject_numbers = (target_column + target_row).compact.uniq
-        base_numbers = (0..9).to_a.shuffle
+        base_numbers = (1..9).to_a.shuffle
         enable_numbers = base_numbers - reject_numbers
         # TODO: enable_numbers が空の場合に対応する
         table << enable_numbers.sample
