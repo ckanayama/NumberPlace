@@ -15,6 +15,16 @@ class Puzzle < ApplicationRecord
     tmp_table = 81.times.map { |i| nil }
     table = []
 
+    groups = [0, 3, 6, 27, 30, 33, 54, 57, 60].map do |i|
+      (i..(i + 2)).to_a + (i + 9..(i + 11)).to_a + (i + 18..(i + 20)).to_a
+    end
+    # groups
+    # ---------------------------------------
+    # | groups[0] |  groups[1] |  groups[2] |
+    # | groups[3] |  groups[4] |  groups[5] |
+    # | groups[6] |  groups[7] |  groups[8] |
+    # ---------------------------------------
+
     tmp_table.each_slice(9).with_index do |row, row_index|
       if row_index.zero?
         table += (1..9).to_a.shuffle
@@ -31,16 +41,19 @@ class Puzzle < ApplicationRecord
           i -=9
           select_indexes << i
         end
-        target_column = select_indexes.map { |i| table[i] }
+        column_numbers = select_indexes.map { |i| table[i] }
         
         # 横の所属
-        target_row = table[(9 * row_index)..(9 * row_index + 8)].presence || []
+        row_numbers = table[(9 * row_index)..(9 * row_index + 8)].presence || []
 
         # ブロックの所属
-        # TODO: imprement
+        group_index = groups.find_index { |group| group.include?(table_index) }
+        group_numbers = groups[group_index].map do |i|
+                          table[i]
+                        end
 
         # 値の選択
-        reject_numbers = (target_column + target_row).compact.uniq
+        reject_numbers = (column_numbers + row_numbers + group_numbers).compact.uniq
         base_numbers = (1..9).to_a.shuffle
         enable_numbers = base_numbers - reject_numbers
         # TODO: enable_numbers が空の場合に対応する
