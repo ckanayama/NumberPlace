@@ -15,14 +15,14 @@ class Puzzle < ApplicationRecord
     tmp_table = 81.times.map { |i| nil }
     table = []
 
-    groups = [0, 3, 6, 27, 30, 33, 54, 57, 60].map do |i|
+    group_indexes = [0, 3, 6, 27, 30, 33, 54, 57, 60].map do |i|
       (i..(i + 2)).to_a + (i + 9..(i + 11)).to_a + (i + 18..(i + 20)).to_a
     end
-    # groups
+    # group_indexes
     # ---------------------------------------
-    # | groups[0] |  groups[1] |  groups[2] |
-    # | groups[3] |  groups[4] |  groups[5] |
-    # | groups[6] |  groups[7] |  groups[8] |
+    # | group_indexes[0] |  group_indexes[1] |  group_indexes[2] |
+    # | group_indexes[3] |  group_indexes[4] |  group_indexes[5] |
+    # | group_indexes[6] |  group_indexes[7] |  group_indexes[8] |
     # ---------------------------------------
 
     tmp_table.each_slice(9).with_index do |row, row_index|
@@ -47,8 +47,8 @@ class Puzzle < ApplicationRecord
         row_numbers = table[(9 * row_index)..(9 * row_index + 8)].presence || []
 
         # ブロックの所属
-        group_index = groups.find_index { |group| group.include?(table_index) }
-        group_numbers = groups[group_index].map do |i|
+        group_index = group_indexes.find_index { |group| group.include?(table_index) }
+        group_numbers = group_indexes[group_index].map do |i|
                           table[i]
                         end
 
