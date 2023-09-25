@@ -1,5 +1,7 @@
 .puzzle
-  - @answer.each do |row|
-    - row.each do |cell|
-      .puzzle_cell= cell
+  -# TODO: 回答できるようにする。表示確認のために今は問題を表示している。
+  - @question.each_slice(9) do |row|
+    .puzzle_row
+      - row.each do |column|
+        .puzzle_column= column
 

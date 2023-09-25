@@ -1,1 +1,5 @@
-h1 テスト
+h1 Number Place
+= button_to 'New Puzzle', puzzles_path
+
+- @puzzles.each do |puzzle|
+  div= puzzle.created_at

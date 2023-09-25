@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "puzzles#index"
 
-  resources :puzzles, only: [:index, :show]
+  resources :puzzles, only: [:index, :show, :create]
 end
