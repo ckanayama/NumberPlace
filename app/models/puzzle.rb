@@ -31,33 +31,40 @@ class Puzzle < ApplicationRecord
         next
       end
 
-      row.each_with_index do |column, column_index|
-        table_index = 9 * row_index + column_index
+      loop do
+        new_row = []
+        row.each_with_index do |column, column_index|
+          table_index = 9 * row_index + column_index
 
-        # 縦の所属
-        select_indexes = []
-        i = table_index
-        while i >= 9 do
-          i -=9
-          select_indexes << i
+          # 縦の所属
+          select_indexes = []
+          i = table_index
+          while i >= 9 do
+            i -=9
+            select_indexes << i
+          end
+          column_numbers = select_indexes.map { |i| table[i] }
+          
+          # 横の所属
+          row_numbers = new_row
+
+          # ブロックの所属
+          group_index = group_indexes.find_index { |group| group.include?(table_index) }
+          group_numbers = group_indexes[group_index].map do |i|
+                            table[i]
+                          end
+
+          # 値の選択
+          reject_numbers = (column_numbers + row_numbers + group_numbers).compact.uniq
+          base_numbers = (1..9).to_a.shuffle
+          enable_numbers = base_numbers - reject_numbers
+          new_row << enable_numbers.sample
         end
-        column_numbers = select_indexes.map { |i| table[i] }
-        
-        # 横の所属
-        row_numbers = table[(9 * row_index)..(9 * row_index + 8)].presence || []
 
-        # ブロックの所属
-        group_index = group_indexes.find_index { |group| group.include?(table_index) }
-        group_numbers = group_indexes[group_index].map do |i|
-                          table[i]
-                        end
-
-        # 値の選択
-        reject_numbers = (column_numbers + row_numbers + group_numbers).compact.uniq
-        base_numbers = (1..9).to_a.shuffle
-        enable_numbers = base_numbers - reject_numbers
-        # TODO: enable_numbers が空の場合に対応する
-        table << enable_numbers.sample
+        unless new_row.include?(nil)
+          table += new_row
+          break
+        end
       end
     end
 
