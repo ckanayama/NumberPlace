@@ -4,11 +4,16 @@ class Puzzle < ApplicationRecord
   private
 
   def setup_puzzle
+    logger.info "********** start setup_puzzle **********"
+
+    logger.info "creating a question"
     question = generate_question
     self.question = question
 
+    logger.info "creating a answer"
     # TODO: 難易度に応じて、空白の数を変える。
     self.answer = generate_answer(question)
+    logger.info "********** finish setup_puzzle **********"
   end
 
   def generate_question
