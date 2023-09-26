@@ -16,6 +16,10 @@
     &:not(:last-child) {
       border-right: 1px solid #777;
     }
+    
+    &.wrong {
+      background-color: #e06565;
+    }
   }
 
   .puzzle_column_input {
@@ -25,6 +29,7 @@
     border: none;
     text-align: center;
     font-size: 1.5rem;
+    background: none;
   }
 
   .puzzle_column_input::-webkit-inner-spin-button,

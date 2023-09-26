@@ -1,13 +1,13 @@
 .puzzle
-  -# TODO: 答えあわせできるようにする。ひとまず適当なURLでフォームを表示している。
-  = form_with url: puzzles_path(@puzzle) do |form|
+  = form_with scope: :answer, url: puzzle_path(@puzzle), method: :patch do |form|
     - @answer.each_slice(9).with_index do |row, row_index|
       .puzzle_row
         - row.each_with_index do |column, column_index|
           - index = row_index * 9 + column_index
           - if @question[index] == column
-            .puzzle_column= column
+            .puzzle_column = column
           - else
-            .puzzle_column = form.number_field :answer, in: 1..9, class: 'puzzle_column_input'
+            div class="puzzle_column #{'wrong' if column.present?}"
+              = form.number_field "index_#{index}", in: 1..9, class: 'puzzle_column_input', value: column
     = form.submit 'Answer'
 = link_to '← Back to top', puzzles_url
