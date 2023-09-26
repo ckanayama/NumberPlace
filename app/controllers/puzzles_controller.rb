@@ -1,6 +1,6 @@
 class PuzzlesController < ApplicationController
   def index
-    @puzzles = Puzzle.order(:created_at)
+    @puzzles = Puzzle.order(created_at: :desc)
   end
 
   def create
