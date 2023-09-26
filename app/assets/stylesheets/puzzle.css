@@ -9,8 +9,28 @@
   }
 
   .puzzle_column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     &:not(:last-child) {
       border-right: 1px solid #777;
     }
   }
+
+  .puzzle_column_input {
+    width: 100%;
+    height: 92%;
+    box-sizing: border-box;
+    border: none;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .puzzle_column_input::-webkit-inner-spin-button,
+  .puzzle_column_input::-webkit-inner-spin-button,
+  .puzzle_column_input[type="number"] { 
+    -webkit-appearance: none !important;
+    -moz-appearance:textfield !important;
+  } 
 }
