@@ -19,6 +19,7 @@ class Puzzle < ApplicationRecord
   def generate_question
     tmp_table = 81.times.map { |i| nil }
     table = []
+    try_limit = 100 # 試行回数の上限
 
     group_indexes = [0, 3, 6, 27, 30, 33, 54, 57, 60].map do |i|
       (i..(i + 2)).to_a + (i + 9..(i + 11)).to_a + (i + 18..(i + 20)).to_a
@@ -36,7 +37,7 @@ class Puzzle < ApplicationRecord
         next
       end
 
-      loop do
+      try_limit.times do
         new_row = []
         row.each_with_index do |column, column_index|
           table_index = 9 * row_index + column_index
@@ -73,7 +74,12 @@ class Puzzle < ApplicationRecord
       end
     end
 
-    table
+    if table.include?(nil)
+      logger.info "recreating a question"
+      generate_question
+    else
+      table
+    end
   end
 
   def generate_answer(question)
