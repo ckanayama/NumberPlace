@@ -17,13 +17,17 @@ class PuzzlesController < ApplicationController
 
   def update
     puzzle = Puzzle.find(params[:id])
+    new_answer = puzzle.answer.dup
+
     answer_params.each do |k, v|
       next if v.blank?
-      # TODO: answer の k番目を v.to_i の値に更新する
+      index = k.split('_').last.to_i
+      new_answer[index] = v.to_i
     end
-    # puzzle.update!(answer: params[:answer])
 
-    # redirect_to puzzle_path(puzzle)
+    puzzle.update!(answer: new_answer)
+
+    redirect_to puzzle_path(puzzle)
   end
 
   private
