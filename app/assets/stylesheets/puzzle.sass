@@ -1,11 +1,22 @@
 .puzzle
+  $border-color: #777;
+
   .puzzle_row
     display: grid
-    grid-template-columns: repeat(9, 1fr)
-    width: 20rem
+    grid-template-columns: repeat(9, 3rem)
+    grid-template-rows: 3rem
+    width: 27rem
     font-size: 1.5rem
-    border: 1px solid #777
+    border-top: 1px solid $border-color
+    border-bottom: 1px solid $border-color
+    border-left: 3px solid $border-color
     text-align: center
+
+    &:nth-of-type(1)
+      border-top: 3px solid $border-color
+
+    &:nth-of-type(3n)
+      border-bottom: 3px solid $border-color
 
   .puzzle_column
     display: flex
@@ -13,8 +24,11 @@
     align-items: center
 
     &:not(:last-child)
-      border-right: 1px solid #777
-    
+      border-right: 1px solid $border-color
+
+    &:nth-child(3n)
+      border-right: 3px solid $border-color
+
     &.wrong
       background-color: #e06565
 
