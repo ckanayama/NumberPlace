@@ -1,0 +1,18 @@
+databases:
+  - name: number_place_production
+    databaseName: number_place
+    user: number_place_user
+
+services:
+  - type: web
+    name: number_place
+    runtime: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: number_place
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
