@@ -10,4 +10,5 @@
             div class="puzzle_column #{'wrong' if column.present?}"
               = form.number_field "index_#{index}", in: 1..9, class: 'puzzle_column_input', value: column
     = form.submit 'Answer'
-= link_to '← Back to top', puzzles_url
+
+= link_to 'はじめにもどる', root_url

@@ -1,4 +1,4 @@
-= button_to 'New Puzzle', puzzles_path
-
 - @puzzles.each do |puzzle|
   div= link_to puzzle.created_at, puzzle_path(puzzle)
+  
+= link_to 'はじめにもどる', root_url
