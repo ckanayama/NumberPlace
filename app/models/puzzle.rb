@@ -75,7 +75,10 @@ class Puzzle < ApplicationRecord
     end
 
     if table.include?(nil)
-      logger.info "recreating a question"
+      logger.info "can't find numners! recreating a question"
+      generate_question
+    elsif table.size != 81
+      logger.info "table size is not 81! recreating a question"
       generate_question
     else
       table
