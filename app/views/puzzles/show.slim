@@ -4,7 +4,7 @@
       .puzzle_row
         - row.each_with_index do |column, column_index|
           - index = row_index * 9 + column_index
-          - if @question[index] == column
+          - if @puzzle.question[index] == column
             .puzzle_column = column
           - else
             div class="puzzle_column #{'wrong' if column.present? && @puzzle.status == 'submitted'}"
