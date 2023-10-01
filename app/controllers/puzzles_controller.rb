@@ -4,30 +4,29 @@ class PuzzlesController < ApplicationController
   end
 
   def create
-    puzzle = Puzzle.create!
+    puzzle = Puzzle.new
+    puzzle.build_number
+    puzzle.save!
 
     redirect_to puzzle_path(puzzle)
   end
 
   def show
     @puzzle = Puzzle.find(params[:id])
-
-    # NOTE: 時々Stringとなってしまうため。ひとまず変換しているが、原因を調査したい。
-    @answer = formatted_answer(@puzzle.answer)
-    @question = formatted_question(@puzzle.question)
   end
 
   def update
     puzzle = Puzzle.find(params[:id])
-    new_answer = puzzle.answer.dup
+    new_answer_array = puzzle.number.thinking_answer_array
 
     answer_params.each do |k, v|
       next if v.blank?
       index = k.split('_').last.to_i
-      new_answer[index] = v.to_i
+      new_answer_array[index] = v.to_i
     end
 
-    puzzle.update!(answer: new_answer, status: status_param)
+    puzzle.update!(status: status_param)
+    puzzle.number.update!(thinking_answer: new_answer_array.map { |n| n.nil? ? 0 : n }.join)
 
     redirect_to puzzle_path(puzzle)
   end
@@ -41,17 +40,5 @@ class PuzzlesController < ApplicationController
 
   def status_param
     params.require(:status)
-  end
-
-  def formatted_answer(answer)
-    return answer if answer.is_a?(Array)
-    logger.info('answer is not Array!!')
-    answer.delete('{').delete('}').split(',').map{ |n| n == 'NULL' ? nil : n.to_i}
-  end
-
-  def formatted_question(question)
-    return question if question.is_a?(Array)
-    logger.info('question is not Array!!')
-    question.delete('{').delete('}').split(',').map{ |n| n == 'NULL' ? nil : n.to_i}
   end
 end

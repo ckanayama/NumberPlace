@@ -1,11 +1,11 @@
 .puzzle
   = "No. #{@puzzle.id}"
   = form_with scope: :answer, url: puzzle_path(@puzzle), method: :patch do |form|
-    - @answer.each_slice(9).with_index do |row, row_index|
+    - @puzzle.number.thinking_answer_array.each_slice(9).with_index do |row, row_index|
       .puzzle_row
         - row.each_with_index do |column, column_index|
           - index = row_index * 9 + column_index
-          - if @puzzle.question[index] == column
+          - if @puzzle.number.correct_answer_array[index] == column
             .puzzle_column = column
           - else
             div class="puzzle_column #{'wrong' if column.present? && @puzzle.status == 'submitted'}"
