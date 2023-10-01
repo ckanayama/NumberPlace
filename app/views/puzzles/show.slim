@@ -1,4 +1,5 @@
 .puzzle
+  = "No. #{@puzzle.id}"
   = form_with scope: :answer, url: puzzle_path(@puzzle), method: :patch do |form|
     - @answer.each_slice(9).with_index do |row, row_index|
       .puzzle_row
@@ -10,9 +11,7 @@
             div class="puzzle_column #{'wrong' if column.present? && @puzzle.status == 'submitted'}"
               = form.number_field "index_#{index}", in: 1..9, class: 'puzzle_column_input', value: column
     - if @puzzle.status != 'copmleted'
-      = form.button type: 'submit', name: 'status', value: 'draft', class: 'puzzle_draft' do 
+      = form.button type: 'submit', name: 'status', value: 'draft', class: 'puzzle_draft no-print' do 
         = Puzzle.human_attribute_name('status.draft')
-      = form.button type: 'submit', name: 'status', value: 'submitted', class: 'puzzle_submit' do 
+      = form.button type: 'submit', name: 'status', value: 'submitted', class: 'puzzle_submit no-print' do 
         = Puzzle.human_attribute_name('status.submitted')
-
-= "No. #{@puzzle.id}"
