@@ -1,0 +1,6 @@
+ja:
+  activerecord:
+    attributes:
+      puzzle/status:
+        draft: "下書き"
+        submitted: "答えあわせ"

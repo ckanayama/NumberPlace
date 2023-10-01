@@ -1,4 +1,5 @@
 class Puzzle < ApplicationRecord
+  enum :status, %i(draft submitted completed)
   before_create :setup_puzzle
 
   private

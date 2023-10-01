@@ -25,7 +25,7 @@ class PuzzlesController < ApplicationController
       new_answer[index] = v.to_i
     end
 
-    puzzle.update!(answer: new_answer)
+    puzzle.update!(answer: new_answer, status: status_param)
 
     redirect_to puzzle_path(puzzle)
   end
@@ -35,5 +35,9 @@ class PuzzlesController < ApplicationController
   def answer_params
     permit_indexes = (0..80).to_a.map { |n| "index_#{n}".to_sym }
     params.require(:answer).permit(permit_indexes)
+  end
+
+  def status_param
+    params.require(:status)
   end
 end

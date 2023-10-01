@@ -7,8 +7,13 @@
           - if @question[index] == column
             .puzzle_column = column
           - else
-            div class="puzzle_column #{'wrong' if column.present?}"
+            div class="puzzle_column #{'wrong' if column.present? && @puzzle.status == 'submitted'}"
               = form.number_field "index_#{index}", in: 1..9, class: 'puzzle_column_input', value: column
-    = form.submit 'Answer'
+    - if @puzzle.status != 'copmleted'
+      = form.button type: 'submit', name: 'status', value: 'draft', class: 'puzzle_draft' do 
+        = Puzzle.human_attribute_name('status.draft')
+      = form.button type: 'submit', name: 'status', value: 'submitted', class: 'puzzle_submit' do 
+        = Puzzle.human_attribute_name('status.submitted')
 
+= "No. #{@puzzle.id}"
 = link_to 'はじめにもどる', root_url
