@@ -15,7 +15,11 @@
 
   <body>
     <h1 class="app_title"><%= link_to 'なんぷれ', root_url %></h1>
-    <%= yield %>
-    <canvas id="maru">
+    <div class="body">
+      <%= yield %>
+    </div>
+    <footer>
+      <canvas id="maru"></canvas>
+    </footer>
   </body>
 </html>

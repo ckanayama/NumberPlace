@@ -2,10 +2,10 @@ body
   margin: 0
   width: 100vw
   height: 100vh
+  overflow: hidden
   padding: 0
   position: relative
-  background: linear-gradient(360deg, #dff4f1, #bff1f4);
-  border-bottom: 30px solid #23b336
+  background: linear-gradient(360deg, #dff4f1, #bff1f4)
   box-sizing: border-box
 
 p, div, input, button, a
@@ -17,10 +17,26 @@ button:hover,
 input:hover
   cursor: pointer
   
-.app_title a
-  font-family: 'Cherry Bomb One', cursive
-  font-size: 2.6rem
+.body
+  height: calc(100% - 90px)
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 0 20px
+
+h1.app_title
   margin: 0
-  padding: 1rem
-  color: #2e1303
-  text-decoration: none
+  padding: 0
+
+  > a
+    padding: 1rem
+    font-family: 'Cherry Bomb One', cursive
+    font-size: 2.6rem
+    color: #2e1303
+    text-decoration: none
+
+footer
+  position: absolute
+  bottom: 0
+  width: 100%
+  border-bottom: 30px solid #23b336
