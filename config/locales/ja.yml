@@ -1,6 +1,10 @@
 ja:
+  time:
+    formats:
+      long: "%Y/%m/%d %H:%M"
   activerecord:
     attributes:
       puzzle/status:
         draft: "下書き"
         submitted: "答えあわせ"
+        completed: "完了"
