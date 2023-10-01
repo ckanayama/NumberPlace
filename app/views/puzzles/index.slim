@@ -3,6 +3,7 @@
     tbody
       - @puzzles.each do |puzzle|
         tr
+          td = "No.#{puzzle.id}"
           td = (I18n.l puzzle.updated_at, format: :long)
           td = Puzzle.human_attribute_name("status.#{puzzle.status}") 
           td
