@@ -7,6 +7,10 @@ class Number < ApplicationRecord
     correct_answer.chars.map{ |n| n.to_i }
   end
 
+  def question_array
+    question.chars.map{ |n| n.to_i.zero? ? nil : n.to_i }
+  end
+
   def thinking_answer_array
     thinking_answer.chars.map{ |n| n.to_i.zero? ? nil : n.to_i }
   end

@@ -5,8 +5,9 @@
       .puzzle_row
         - row.each_with_index do |column, column_index|
           - index = row_index * 9 + column_index
-          - if @puzzle.number.correct_answer_array[index] == column
-            .puzzle_column = column
+          - if @puzzle.number.question_array[index].present?
+            div.puzzle_column id=" index_#{index}"
+              = column
           - else
             div class="puzzle_column #{'wrong' if column.present? && @puzzle.status == 'submitted'}"
               = form.number_field "index_#{index}", in: 1..9, class: 'puzzle_column_input', value: column
