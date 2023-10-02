@@ -9,7 +9,7 @@
             div.puzzle_column id=" index_#{index}"
               = column
           - else
-            div class="puzzle_column #{'wrong' if column.present? && @puzzle.status == 'submitted'}"
+            div class="puzzle_column #{'wrong' if column.present? && @puzzle.status == 'submitted'}" id="index_#{index}"
               = form.number_field "index_#{index}", in: 1..9, class: 'puzzle_column_input', value: column
     - if @puzzle.status != 'copmleted'
       = form.button type: 'submit', name: 'status', value: 'draft', class: 'puzzle_draft no-print' do 

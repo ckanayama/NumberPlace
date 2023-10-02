@@ -1,5 +1,6 @@
 .puzzle
-  $border-color: #55260b;
+  $border-color: #55260b
+  $higthlight-color: #23b3361f
 
   .puzzle_row
     display: grid
@@ -12,6 +13,7 @@
     border-left: 3px solid $border-color
     font-size: 1.5rem
     text-align: center
+    background: #fff
 
     &:nth-of-type(1)
       border-top: 3px solid $border-color
@@ -21,6 +23,11 @@
 
     &:nth-of-type(9)
       margin-bottom: 30px
+
+    /* ハイライト */
+    &:hover
+      .puzzle_column 
+        background-color: $higthlight-color
       
   .puzzle_column
     display: flex
@@ -40,6 +47,9 @@
       .puzzle_column_input
         color: #000
 
+  .puzzle_column_hover
+    background-color: $higthlight-color
+
   .puzzle_column_input
     width: 100%
     height: 92%
@@ -47,6 +57,7 @@
     border: none
     text-align: center
     font-size: 1.5rem
+    color: #1280a6
     background: none
 
   .puzzle_column_input::-webkit-inner-spin-button,
