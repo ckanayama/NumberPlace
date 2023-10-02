@@ -1,4 +1,6 @@
 class PuzzlesController < ApplicationController
+  before_action :set_puzzle, only: [:show, :update, :destroy]
+
   def index
     @puzzles = Puzzle.order(updated_at: :desc)
   end
@@ -11,13 +13,10 @@ class PuzzlesController < ApplicationController
     redirect_to puzzle_path(puzzle)
   end
 
-  def show
-    @puzzle = Puzzle.find(params[:id])
-  end
+  def show; end
 
   def update
-    puzzle = Puzzle.find(params[:id])
-    new_answer_array = puzzle.number.thinking_answer_array
+    new_answer_array = @puzzle.number.thinking_answer_array
 
     answer_params.each do |k, v|
       next if v.blank?
@@ -25,13 +24,23 @@ class PuzzlesController < ApplicationController
       new_answer_array[index] = v.to_i
     end
 
-    puzzle.update!(status: status_param)
-    puzzle.number.update!(thinking_answer: new_answer_array.map { |n| n.nil? ? 0 : n }.join)
+    @puzzle.update!(status: status_param)
+    @puzzle.number.update!(thinking_answer: new_answer_array.map { |n| n.nil? ? 0 : n }.join)
 
-    redirect_to puzzle_path(puzzle)
+    redirect_to puzzle_path(@puzzle)
+  end
+
+  def destroy
+    @puzzle.destroy!
+
+    redirect_to root_path
   end
 
   private
+
+  def set_puzzle
+    @puzzle = Puzzle.find(params[:id])
+  end
 
   def answer_params
     permit_indexes = (0..80).to_a.map { |n| "index_#{n}".to_sym }
