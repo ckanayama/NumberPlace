@@ -5,11 +5,14 @@
       .puzzle_row
         - row.each_with_index do |column, column_index|
           - index = row_index * 9 + column_index
-          - if @puzzle.number.question_array[index].present?
+          - if @puzzle.status == 'submitted' && @puzzle.number.correct_answer_array[index] != column
+            div.puzzle_column.wrong id="index_#{index}"
+              = form.number_field "index_#{index}", in: 1..9, class: 'puzzle_column_input', value: column
+          - elsif @puzzle.number.question_array[index].present?
             div.puzzle_column id=" index_#{index}"
               = column
           - else
-            div class="puzzle_column #{'wrong' if column.present? && @puzzle.status == 'submitted'}" id="index_#{index}"
+            div.puzzle_column id="index_#{index}"
               = form.number_field "index_#{index}", in: 1..9, class: 'puzzle_column_input', value: column
     - if @puzzle.status != 'copmleted'
       = form.button type: 'submit', name: 'status', value: 'draft', class: 'puzzle_draft no-print' do 
