@@ -3,17 +3,14 @@
   = form_with scope: :answer, url: puzzle_path(@puzzle), method: :patch do |form|
     - @puzzle.number.thinking_answer_array.each_slice(9).with_index do |row, row_index|
       .puzzle_row
-        - row.each_with_index do |column, column_index|
+        - row.each_with_index do |number, column_index|
           - index = row_index * 9 + column_index
-          - if @puzzle.status == 'submitted' && @puzzle.number.correct_answer_array[index] != column
-            div.puzzle_column.wrong id="index_#{index}"
-              = form.number_field "index_#{index}", in: 1..9, class: 'puzzle_column_input', value: column
-          - elsif @puzzle.number.question_array[index].present?
+          - if @puzzle.number.question_array[index].present?
             div.puzzle_column id=" index_#{index}"
-              = column
+              = number 
           - else
-            div.puzzle_column id="index_#{index}"
-              = form.number_field "index_#{index}", in: 1..9, class: 'puzzle_column_input', value: column
+            div class="puzzle_column #{'wrong' if wrong_answer?(index, number)}" id="index_#{index}"
+              = form.number_field "index_#{index}", in: 1..9, class: 'puzzle_column_input', value: number
     - if @puzzle.status != 'copmleted'
       = form.button type: 'submit', name: 'status', value: 'draft', class: 'puzzle_draft no-print' do 
         = Puzzle.human_attribute_name('status.draft')
