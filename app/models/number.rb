@@ -1,4 +1,5 @@
 class Number < ApplicationRecord
+  BLANK_SYMBOL = '_'.freeze
   belongs_to :puzzle
 
   before_save :setup_numbers, :if => :new_record?
@@ -103,7 +104,7 @@ class Number < ApplicationRecord
     question.each_slice(9).map do |row|
       hidden_cell = (0..8).to_a.sample(5)
       row.map do |cell|
-        hidden_cell.include?(cell) ? 0 : cell
+        hidden_cell.include?(cell) ? BLANK_SYMBOL : cell
       end
     end.flatten.join
   end

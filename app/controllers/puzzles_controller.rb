@@ -19,13 +19,12 @@ class PuzzlesController < ApplicationController
     new_answer_array = @puzzle.number.thinking_answer_array
 
     answer_params.each do |k, v|
-      next if v.blank?
       index = k.split('_').last.to_i
-      new_answer_array[index] = v.to_i
+      new_answer_array[index] = k.blank? ? Number::BLANK_SYMBOL : v.to_i
     end
 
     @puzzle.update!(status: status_param)
-    @puzzle.number.update!(thinking_answer: new_answer_array.map { |n| n.nil? ? 0 : n }.join)
+    @puzzle.number.update!(thinking_answer: new_answer_array.join)
 
     redirect_to puzzle_path(@puzzle)
   end
