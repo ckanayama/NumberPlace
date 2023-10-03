@@ -5,7 +5,7 @@
         tr
           td = "No.#{puzzle.id}"
           td = (I18n.l puzzle.updated_at, format: :long)
-          td = Puzzle.human_attribute_name("status.#{puzzle.status}") 
+          td = Puzzle.human_attribute_name("status.#{puzzle.status}")
           td
             - if puzzle.status != 'completed'
               = link_to '再開する', puzzle_path(puzzle), class: 'history_restart'
