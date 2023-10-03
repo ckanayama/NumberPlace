@@ -11,8 +11,7 @@
           - else
             div class="puzzle_column #{'wrong' if wrong_answer?(index, number)}" id="index_#{index}"
               = form.number_field "index_#{index}", in: 1..9, class: 'puzzle_column_input', value: number
-    - if @puzzle.status != 'copmleted'
-      = form.button type: 'submit', name: 'status', value: 'draft', class: 'puzzle_draft no-print' do 
-        = Puzzle.human_attribute_name('status.draft')
-      = form.button type: 'submit', name: 'status', value: 'submitted', class: 'puzzle_submit no-print' do 
-        = Puzzle.human_attribute_name('status.submitted')
+    = form.button type: 'submit', name: 'status', value: 'draft', class: 'puzzle_draft no-print' do 
+      | 中断する
+    = form.button type: 'submit', name: 'status', value: 'submitted', class: 'puzzle_submit no-print' do 
+      = Puzzle.human_attribute_name('status.submitted')

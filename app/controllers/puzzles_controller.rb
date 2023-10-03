@@ -6,7 +6,7 @@ class PuzzlesController < ApplicationController
   end
 
   def create
-    puzzle = Puzzle.new
+    puzzle = Puzzle.new(status: :draft)
     puzzle.build_number
     puzzle.save!
 
@@ -23,10 +23,16 @@ class PuzzlesController < ApplicationController
       new_answer_array[index] = k.blank? ? Number::BLANK_SYMBOL : v.to_i
     end
 
-    @puzzle.update!(status: status_param)
+    status = (new_answer_array == @puzzle.number.correct_answer_array) ? :completed : status_param
+
+    @puzzle.update!(status: status)
     @puzzle.number.update!(thinking_answer: new_answer_array.join)
 
-    redirect_to puzzle_path(@puzzle)
+    if status == 'draft'
+      redirect_to puzzles_path
+    else
+      redirect_to puzzle_path(@puzzle)
+    end
   end
 
   def destroy
