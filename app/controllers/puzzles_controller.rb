@@ -1,5 +1,5 @@
 class PuzzlesController < ApplicationController
-  before_action :set_puzzle, only: [:show, :update, :destroy]
+  before_action :set_puzzle, only: [:show, :update, :reset, :destroy]
 
   def index
     @puzzles = Puzzle.order(updated_at: :desc)
@@ -28,11 +28,18 @@ class PuzzlesController < ApplicationController
     @puzzle.update!(status: status)
     @puzzle.number.update!(thinking_answer: new_answer_array.join)
 
-    if status == 'draft'
+    if @puzzle.draft?
       redirect_to puzzles_path
     else
       redirect_to puzzle_path(@puzzle)
     end
+  end
+
+  def reset
+    @puzzle.update!(status: :draft)
+    @puzzle.number.update!(thinking_answer: @puzzle.number.question)
+
+    redirect_to puzzle_path(@puzzle)
   end
 
   def destroy

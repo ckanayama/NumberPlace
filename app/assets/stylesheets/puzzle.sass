@@ -65,22 +65,30 @@
   .puzzle_column_input[type="number"]
     -webkit-appearance: none !important
     -moz-appearance:textfield !important
-
-  .puzzle_draft
+  
+  .btn
     display: block
-    margin: 0 auto 10px
-    padding: 10px 50px
-    border: none
-    border-radius: 10px
-    background: #f19e9e
-    font-size: 1rem
-    font-weight: bold
-
-  .puzzle_submit
-    display: block
-    margin: 0 auto
-    padding: 8px 10px
     border: none
     border-radius: 10px
     background: #fff
+
+  .puzzle_main_action
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-bottom: 20px 
+
+    .puzzle_draft
+      margin-right: 20px 
+      padding: 10px 50px
+      background: #f19e9e
+      font-weight: bold
+
+    .puzzle_submit
+      padding: 10px
+
+  .puzzle_reset
+    margin: 0 auto
+    padding: 8px
     font-size: .8rem
+    background: none

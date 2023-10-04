@@ -8,5 +8,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#home"
 
-  resources :puzzles, only: [:index, :show, :create, :update, :destroy]
+  resources :puzzles, only: [:index, :show, :create, :update, :destroy] do
+    member do
+      post :reset
+    end
+  end
 end
