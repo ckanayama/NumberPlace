@@ -20,6 +20,9 @@
       <%= yield %>
     </div>
     <footer>
+      <%- if @comment %>
+        <div class="comment"><%= @comment %></div>
+      <%- end %>
       <canvas id="maru"></canvas>
     </footer>
   </body>

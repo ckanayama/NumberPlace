@@ -13,7 +13,10 @@ class PuzzlesController < ApplicationController
     redirect_to puzzle_path(puzzle)
   end
 
-  def show; end
+  def show
+    # TODO: ランダムにコメントを表示したい。失敗回数に応じてコメントを変えたい。
+    @comment = 'がんばって!!'
+  end
 
   def update
     new_answer_array = @puzzle.number.thinking_answer_array
