@@ -1,4 +1,9 @@
 .history
+  - if flash[:success]
+    .history_overlay
+    - animal = ['usa', 'piyo', 'kuma'].sample
+    = image_tag "history/omede#{animal}.png", class: 'history_success'
+
   table.history_table
     tbody
       - @puzzles.each do |puzzle|

@@ -30,6 +30,9 @@ class PuzzlesController < ApplicationController
 
     if @puzzle.draft?
       redirect_to puzzles_path
+    elsif @puzzle.completed?
+      flash[:success] = "completed"
+      redirect_to puzzles_path
     else
       redirect_to puzzle_path(@puzzle)
     end
