@@ -1,0 +1,8 @@
+.setting
+  = form_with model: @setting, url: settings_path, method: :patch do |f|
+    .setting_form_inner
+      div = f.label Setting.human_attribute_name("challenge_level")
+      div = f.select :challenge_level, Setting.challenge_levels.keys.map { |key| [Setting.human_attribute_name("challenge_level.#{key}"), key] }
+      div = f.label Setting.human_attribute_name("theme")
+      div = f.select :theme, Setting.themes.keys.map { |key| [Setting.human_attribute_name("theme.#{key}"), key] }
+    div = f.submit '更新する', class: 'setting_submit'

@@ -13,4 +13,6 @@ Rails.application.routes.draw do
       post :reset
     end
   end
+
+  resource :settings, only: [:edit, :update]
 end

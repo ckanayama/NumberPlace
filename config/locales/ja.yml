@@ -8,3 +8,17 @@ ja:
         draft: "下書き"
         submitted: "答えあわせ"
         completed: "完了"
+      puzzle/challenge_level:
+        easy: "かんたん"
+        normal: "ふつう"
+        hard: "むずかしい"
+      setting:
+        challenge_level: "むずかしさ"
+        theme: "テーマ"
+      setting/challenge_level:
+        easy: "かんたん"
+        normal: "ふつう"
+        hard: "むずかしい"
+      setting/theme:
+        default: "ふつう"
+        dark: "ダーク"

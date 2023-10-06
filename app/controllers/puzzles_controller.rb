@@ -1,12 +1,14 @@
 class PuzzlesController < ApplicationController
   before_action :set_puzzle, only: [:show, :update, :reset, :destroy]
+  before_action :set_setting, only: [:create]
 
   def index
+    flash[:notice] = 'やっぼー'
     @puzzles = Puzzle.order(updated_at: :desc)
   end
 
   def create
-    puzzle = Puzzle.new(status: :draft)
+    puzzle = Puzzle.new(status: :draft, challenge_level: @setting.challenge_level)
     puzzle.build_number
     puzzle.save!
 
@@ -14,8 +16,7 @@ class PuzzlesController < ApplicationController
   end
 
   def show
-    # TODO: ランダムにコメントを表示したい。失敗回数に応じてコメントを変えたい。
-    @comment = 'がんばって!!'
+    flash[:notice] = 'がんばろー'
   end
 
   def update
@@ -58,6 +59,10 @@ class PuzzlesController < ApplicationController
 
   def set_puzzle
     @puzzle = Puzzle.find(params[:id])
+  end
+
+  def set_setting
+    @setting = Setting.first # TODO: User ができたら current_user.setting にしたい
   end
 
   def answer_params
