@@ -52,7 +52,7 @@ class PuzzlesController < ApplicationController
   def destroy
     @puzzle.destroy!
 
-    redirect_to root_path
+    redirect_to puzzles_path
   end
 
   private
