@@ -101,8 +101,17 @@ class Number < ApplicationRecord
   end
 
   def generate_question(question)
+    hidden_cell_number = case puzzle.challenge_level
+                         when 'easy'
+                            2
+                         when 'normal'
+                            5
+                         when 'hard'
+                            6
+                         end
+
     question.each_slice(9).map do |row|
-      hidden_cell = (0..8).to_a.sample(5)
+      hidden_cell = (0..8).to_a.sample(hidden_cell_number)
       row.map do |cell|
         hidden_cell.include?(cell) ? BLANK_SYMBOL : cell
       end
