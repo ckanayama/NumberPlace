@@ -111,7 +111,7 @@ class Number < ApplicationRecord
                          end
 
     question.each_slice(9).map do |row|
-      hidden_cell = (0..8).to_a.sample(hidden_cell_number)
+      hidden_cell = (1..9).to_a.sample(hidden_cell_number)
       row.map do |cell|
         hidden_cell.include?(cell) ? BLANK_SYMBOL : cell
       end
