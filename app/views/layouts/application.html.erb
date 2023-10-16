@@ -14,7 +14,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="<%= @theme %>">
     <header>  
       <h1 class="app_title"><%= link_to 'なんぷれ', root_url %></h1>
       <%= link_to '設定', edit_settings_url %>
