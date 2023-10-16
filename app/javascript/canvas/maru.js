@@ -10,6 +10,8 @@ window.addEventListener('load', function() {
 
   canvas.onmousedown = function() {
     canvas.addEventListener('mousemove', mouseMove);
+    const comment = document.getElementById("comment");
+    comment.style.display = "none";
   };
 
   canvas.onmouseup = function() {

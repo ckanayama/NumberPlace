@@ -23,10 +23,11 @@
       <%= yield %>
     </div>
     <footer>
-      <%- if flash[:notice] %>
-        <div class="comment"><%= flash[:notice] %></div>
-      <%- end %>
+      &copy; 2023 ckanayama
     </footer>
+    <%- if flash[:notice] %>
+      <div id="comment"><%= flash[:notice] %></div>
+    <%- end %>
     <canvas id="maru"></canvas>
   </body>
 </html>
