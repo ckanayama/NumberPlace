@@ -24,7 +24,7 @@ class PuzzlesController < ApplicationController
 
     answer_params.each do |k, v|
       index = k.split('_').last.to_i
-      new_answer_array[index] = k.blank? ? Number::BLANK_SYMBOL : v.to_i
+      new_answer_array[index] = v.blank? ? Number::BLANK_SYMBOL : v.to_i
     end
 
     status = (new_answer_array == @puzzle.number.correct_answer_array) ? :completed : status_param
