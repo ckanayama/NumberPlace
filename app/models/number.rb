@@ -25,7 +25,6 @@ class Number < ApplicationRecord
     self.correct_answer = correct_answer_array.join
 
     logger.info "creating question and thinking_answer"
-    # TODO: 難易度に応じて、空白の数を変えたい
     self.question = generate_question(correct_answer_array)
     self.thinking_answer = self.question
     logger.info "********** finish setup_numbers **********"
