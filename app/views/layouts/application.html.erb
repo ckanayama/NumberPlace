@@ -17,7 +17,7 @@
   <body class="<%= @theme %>">
     <header>  
       <h1 class="app_title"><%= link_to 'なんぷれ', root_url %></h1>
-      <%= link_to '設定', edit_settings_url %>
+      <%= link_to '設定', edit_settings_url, class: 'no-print' %>
     </header>
     <div class="body">
       <%= yield %>
@@ -26,8 +26,8 @@
       &copy; 2023 ckanayama
     </footer>
     <%- if flash[:notice] %>
-      <div id="comment"><%= flash[:notice] %></div>
+      <div id="comment" class="no-print"><%= flash[:notice] %></div>
     <%- end %>
-    <canvas id="maru"></canvas>
+    <canvas id="maru" class="no-print"></canvas>
   </body>
 </html>
