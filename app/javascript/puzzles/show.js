@@ -1,5 +1,7 @@
 window.addEventListener('load', function() {
+  // ********* マウスオーバー時のハイライト *********
   var puzzle_columns = document.getElementsByClassName("puzzle_column");
+
   for(var i = 0; i < puzzle_columns.length; i++) {
     puzzle_columns[i].addEventListener('mouseover', function() {
       this.classList.add("puzzle_column_hover");
@@ -41,5 +43,14 @@ window.addEventListener('load', function() {
     }
 
     return indexes;
-  }  
+  }
+
+  // ********* 答え合わせで間違えた箇所をやり直したとき *********
+  var wrong_columns = document.getElementsByClassName("wrong");
+
+  for(var i = 0; i < wrong_columns.length; i++) {
+    wrong_columns[i].addEventListener('click', function() {
+      this.classList.remove("wrong");
+    });
+  };
 });
