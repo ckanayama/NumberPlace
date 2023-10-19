@@ -1,6 +1,6 @@
 window.addEventListener('load', function() {
   var puzzle_columns = document.getElementsByClassName("puzzle_column");
-  for(var i = 0; i < puzzle_columns.length; i++){
+  for(var i = 0; i < puzzle_columns.length; i++) {
     puzzle_columns[i].addEventListener('mouseover', function() {
       this.classList.add("puzzle_column_hover");
       let index = this.id.replace("index_", "");
@@ -21,7 +21,7 @@ window.addEventListener('load', function() {
   function selectIndexes(index) {
     let indexes = [];
 
-    // 0　まで
+    // 0まで
     while (index > 0) {
       index-=9;
       if (index < 0) { break; }

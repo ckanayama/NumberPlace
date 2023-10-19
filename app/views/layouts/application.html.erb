@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= favicon_link_tag('favicon.ico') %>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=M+PLUS+1:wght@200&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
   </head>
 
   <body class="<%= @theme %>">
-    <header>  
+    <header>
       <h1 class="app_title"><%= link_to 'なんぷれ', root_url %></h1>
       <%= link_to '設定', edit_settings_url, class: 'no-print' %>
     </header>

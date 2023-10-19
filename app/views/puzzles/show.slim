@@ -7,14 +7,14 @@
           - index = row_index * 9 + column_index
           - if @puzzle.number.question_array[index].present?
             div.puzzle_column id=" index_#{index}"
-              = number 
+              = number
           - else
             div class="puzzle_column #{'wrong' if wrong_answer?(index, number)}" id="index_#{index}"
               = form.number_field "index_#{index}", in: 1..9, class: 'puzzle_column_input', value: number
     .puzzle_main_action
-      = form.button type: 'submit', name: 'status', value: 'draft', class: 'btn puzzle_draft no-print' do 
+      = form.button type: 'submit', name: 'status', value: 'draft', class: 'btn puzzle_draft no-print' do
         | 中断する
-      = form.button type: 'submit', name: 'status', value: 'submitted', class: 'btn puzzle_submit no-print' do 
+      = form.button type: 'submit', name: 'status', value: 'submitted', class: 'btn puzzle_submit no-print' do
         = Puzzle.human_attribute_name('status.submitted')
         | する
   = button_to 'リセットする', reset_puzzle_path(@puzzle), method: :post, class: 'btn puzzle_reset no-print'

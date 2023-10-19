@@ -1,6 +1,6 @@
 class SettingsController < ApplicationController
   before_action :set_setting, only: [:edit, :update]
-  
+
   def edit; end
 
   def update

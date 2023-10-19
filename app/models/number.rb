@@ -64,7 +64,7 @@ class Number < ApplicationRecord
             select_indexes << i
           end
           column_numbers = select_indexes.map { |i| table[i] }
-          
+
           # 横の数
           row_numbers = new_row
 
