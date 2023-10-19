@@ -5,15 +5,15 @@ class Number < ApplicationRecord
   before_save :setup_numbers, :if => :new_record?
 
   def correct_answer_array
-    correct_answer.chars.map{ |n| n.to_i }
+    correct_answer.chars.map { |n| n.to_i }
   end
 
   def question_array
-    question.chars.map{ |n| n.to_i.zero? ? nil : n.to_i }
+    question.chars.map { |n| n == BLANK_SYMBOL ? nil : n.to_i }
   end
 
   def thinking_answer_array
-    thinking_answer.chars.map{ |n| n.to_i.zero? ? nil : n.to_i }
+    thinking_answer.chars.map { |n| n == BLANK_SYMBOL ? nil : n.to_i }
   end
 
   private
@@ -56,7 +56,7 @@ class Number < ApplicationRecord
         row.each_with_index do |column, column_index|
           table_index = 9 * row_index + column_index
 
-          # 縦の所属
+          # 縦の数
           select_indexes = []
           i = table_index
           while i >= 9 do
@@ -65,19 +65,16 @@ class Number < ApplicationRecord
           end
           column_numbers = select_indexes.map { |i| table[i] }
           
-          # 横の所属
+          # 横の数
           row_numbers = new_row
 
-          # ブロックの所属
-          group_index = group_indexes.find_index { |group| group.include?(table_index) }
-          group_numbers = group_indexes[group_index].map do |i|
-                            table[i]
-                          end
+          # ブロックの数
+          group_index = group_indexes.find_index { |index| index.include?(table_index) }
+          group_numbers = group_indexes[group_index].map {|i| table[i] }
 
           # 値の選択
           reject_numbers = (column_numbers + row_numbers + group_numbers).compact.uniq
-          base_numbers = (1..9).to_a.shuffle
-          enable_numbers = base_numbers - reject_numbers
+          enable_numbers = (1..9).to_a - reject_numbers
           new_row << enable_numbers.sample
         end
 
@@ -99,8 +96,8 @@ class Number < ApplicationRecord
     end
   end
 
-  def generate_question(question)
-    hidden_cell_number = case puzzle.challenge_level
+  def generate_question(question_array)
+    hidden_cell_size = case puzzle.challenge_level
                          when 'easy'
                             2
                          when 'normal'
@@ -109,10 +106,10 @@ class Number < ApplicationRecord
                             6
                          end
 
-    question.each_slice(9).map do |row|
-      hidden_cell = (1..9).to_a.sample(hidden_cell_number)
+    question_array.each_slice(9).map do |row|
+      hidden_cells = (1..9).to_a.sample(hidden_cell_size)
       row.map do |cell|
-        hidden_cell.include?(cell) ? BLANK_SYMBOL : cell
+        hidden_cells.include?(cell) ? BLANK_SYMBOL : cell
       end
     end.flatten.join
   end
